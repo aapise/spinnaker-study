@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: mild-temper-microservice
+        app: applied-harmony-microservice
         stack: frontend
         source: demo
-    name: mild-temper-microservice
+    name: applied-harmony-microservice
     namespace: microservices
 spec:
     replicas: 5
     selector:
         matchLabels:
-            run: mild-temper-microservice
+            run: applied-harmony-microservice
     template:
         metadata:
             labels:
-                app: mild-temper-microservice
-                run: mild-temper-microservice
+                app: applied-harmony-microservice
+                run: applied-harmony-microservice
                 source: demo
         spec:
             containers:
-                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/mild-temper-microservice
-                    name: mild-temper-microservice
+                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/applied-harmony-microservice
+                    name: applied-harmony-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,14 +31,14 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: mild-temper-microservice-service
+        app: applied-harmony-microservice-service
         stack: frontend
-    name: mild-temper-microservice-service
+    name: applied-harmony-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: mild-temper-microservice
+        app: applied-harmony-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -54,7 +54,7 @@ metadata:
         stack: frontend
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: mild-temper-ingress
+    name: applied-harmony-ingress
     namespace: microservices
 spec:
     ingressClassName: nginx
@@ -62,10 +62,10 @@ spec:
         -   http:
                 paths:
                     -  pathType: Prefix 
-                       path: /mild-temper(/|$)(.*)
+                       path: /applied-harmony(/|$)(.*)
                        backend:
                           service:
-                            name: mild-temper-microservice-service
+                            name: applied-harmony-microservice-service
                             port: 
                                number: 30201
 
